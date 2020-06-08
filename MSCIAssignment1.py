@@ -4,6 +4,7 @@ import argparse
 import re
 import random
 
+
 def read_dataset(data_path):
     """
     reads the raw dataset and returns all the lines as a list of string
@@ -15,7 +16,7 @@ def read_dataset(data_path):
     with open(os.path.join(data_path, 'neg.txt')) as f:
         neg_lines = f.readlines()
     all_lines = pos_lines + neg_lines
-    print("read files")
+
     return all_lines
 def main(data_path):
     """
@@ -40,7 +41,7 @@ def main(data_path):
         for w in range(len(words)):
             test = re.sub(r'[^a-zA-Z0-9,.\']', " ", str(words[w]))
             words[w]=test
-    print("Special caharcters removed ")
+
 
     random.shuffle(lines)
 
@@ -72,7 +73,7 @@ def main(data_path):
             for j in i:
                 f.write(j + ",")
             f.write("\n")
-    print("csv created")
+
     temp_list_1=[]
     for main_itr in range(len(lines)):
         for j in range(len(lines[main_itr])):
@@ -80,7 +81,7 @@ def main(data_path):
                 temp_list_1.append(lines[main_itr][j])
         lines[main_itr]=temp_list_1.copy()
         temp_list_1.clear()
-    print("stopwords removed")
+
     train_set_1 = lines[:int(0.8*len(lines))]
     val_set_1 = lines[int(0.8*len(lines)):int(0.9*len(lines))]
     test_set_1 = lines[int(0.9*len(lines)):]
@@ -110,7 +111,7 @@ def main(data_path):
             for j in i:
                 f.write(j + ",")
             f.write("\n")
-    print("csv created")
+
 
 if __name__ == "__main__":
     input = sys.argv[1]
