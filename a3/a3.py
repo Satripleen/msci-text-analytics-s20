@@ -11,12 +11,9 @@ def read_dataset(data_path):
     # os.path can be used for seamless path construction across different
     # operating systems.
 
-    with open(os.path.join(data_path, 'pos.txt')) as f:
-        pos_lines = f.readlines()
-    with open(os.path.join(data_path, 'neg.txt')) as f:
-        neg_lines = f.readlines()
-    all_lines = pos_lines + neg_lines
-    return list(zip(all_lines, ["pos"]*len(pos_lines) + ["neg"]*len(neg_lines)))
+    with open(os.path.join(data_path, 'sample.txt')) as f:
+        sample_text = f.readlines()
+    return sample_text
 def main(data_path):
     """
     Train a word2vec model on the given dataset
@@ -27,14 +24,13 @@ def main(data_path):
 
 
     lines = []
-    label = []
+
     #Split each sentence in the list, and append to result list
     for s in all_lines:
-        sentence = s[0].strip().split()
-        l = s[1]
-        # construct the entry to be added to the csv files
+        sentence = s.strip().split()
+
         lines.append(sentence)
-        label.append(l)
+
 
     for words in lines:
         for w in range(len(words)):
@@ -46,7 +42,7 @@ def main(data_path):
     print('Training word2vec model')
     # This will take some to finish
     w2v = Word2Vec( lines, size=100, window=5, min_count=1, workers=4)
-    w2v.save('a3/data/w2v.model')
+    w2v.save('./data/w2v.model')
 
 
 
