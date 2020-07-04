@@ -77,6 +77,7 @@ def main(data_dir):
     x_train,x_val,x_test = load_data(data_dir)
     train_label,val_label,test_label = target(data_dir)
 
+    # The path of Word to vec model is taken from path of a3 assignment.
     w2v = Word2Vec.load("../a3/data/w2v.model")
 
     embedding_matrix, x_train, x_val = embedding_mat(w2v, x_train, x_val)
@@ -126,6 +127,8 @@ def main(data_dir):
     # # fit the model
     # model.fit(x_train, train_label, epochs=20, validation_data=(x_val, val_label), batch_size=4096)
     # model.save("./data/nn_sigmoid.model")
+
+
 
     #model.add(
     #     Embedding(input_dim=embedding_matrix.shape[0], output_dim=embedding_matrix.shape[1], input_length=max_doc_len,
